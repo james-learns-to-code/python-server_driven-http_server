@@ -122,15 +122,15 @@ class PostHandler(BaseHTTPRequestHandler):
         if path == ROUTE_PRODUCT_LIST_COORDINATOR:
             self.send_response(200)
             self.end_headers()
-            self.wfile.write(js)
+            self.wfile.write(bytes(js, 'utf-8'))
         elif path == ROUTE_PRODUCT_LIST_LAYOUT:
             self.send_response(200)
             self.end_headers()
-            self.wfile.write(xml)
+            self.wfile.write(bytes(xml, 'utf-8'))
         else:
             self.send_response(404)
             self.end_headers()
-            self.wfile.write('Path is Not Found' + path + "=!" + ROUTE_PRODUCT_LIST_COORDINATOR)
+            self.wfile.write(b'Path is Not Found')
 
 if __name__ == '__main__':
     port = 80
