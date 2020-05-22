@@ -14,7 +14,7 @@ ROUTE_PRODUCT_LIST_LAYOUT = ROUTE_PRODUCT_LIST + ROUTE_LAYOUT
 
 # String
 
-js = '''
+jsOpen = '''
 var img0 = "https://loveandpop.kr/web/product/medium/20200210/3a741bdb02e4aeeee56651aa1fb12d8c.jpg"
 var img1 = "https://loveandpop.kr/web/product/medium/20200211/344df0d9732de6b280017a691e4e2c79.jpg"
 var img2 = "https://loveandpop.kr/web/product/medium/20200513/a28ccff77e9d498a4e182e91de75d455.jpg"
@@ -54,6 +54,66 @@ var message = function(message, callback, tag) {
                     break;
                 case 12:
                     callback('openURL', imgURL2)
+                    break;
+                case 13:
+                    callback('openURL', imgURL3)
+                    break;
+                case 14:
+                    callback('openURL', imgURL4)
+                    break;
+                case 15:
+                    callback('openURL', imgURL5)
+                    break;
+                default:
+                    break;
+            }
+        default:
+            break;
+            
+    }
+}
+'''
+
+jsMove = '''
+var img0 = "https://loveandpop.kr/web/product/medium/20200210/3a741bdb02e4aeeee56651aa1fb12d8c.jpg"
+var img1 = "https://loveandpop.kr/web/product/medium/20200211/344df0d9732de6b280017a691e4e2c79.jpg"
+var img2 = "https://loveandpop.kr/web/product/medium/20200513/a28ccff77e9d498a4e182e91de75d455.jpg"
+var img3 = "https://www.bebeche.com/web/product/medium/20200507/43362e929b0571550a13b98ba504c20e.jpg"
+var img4 = "https://www.bebeche.com/web/product/medium/20200221/83b7b2b533c1bbe1f2c49002e6d6f9d1.jpg"
+var img5 = "https://www.bebeche.com/web/product/medium/20191115/9647b226232c493c6644ca68cf48aaf2.jpg"
+
+var imgURL0 = 'https://loveandpop.kr/product/detail.html?product_no=3965&cate_no=46&display_group=2'
+var imgURL1 = 'https://loveandpop.kr/product/detail.html?product_no=1655&cate_no=46&display_group=2'
+var imgURL2 = 'https://loveandpop.kr/product/detail.html?product_no=4714&cate_no=46&display_group=1'
+var imgURL3 = 'https://www.bebeche.com/product/2colors-%EB%AF%B9%EC%8A%A4-%EB%9E%A9-%EC%8A%A4%ED%8A%B8%EB%9D%BC%EC%9D%B4%ED%94%84%EA%B0%80%EB%94%94%EA%B1%B4cd/3890/category/138/display/1'
+var imgURL4 = 'https://www.bebeche.com/product/3colors-%EC%A1%B4-%ED%94%84%EB%A6%B0%ED%8C%85%EB%B0%95%EC%8A%A4%EB%A7%A8%ED%88%AC%EB%A7%A8mtm/3712/category/138/display/1'
+var imgURL5 = 'https://www.bebeche.com/product/%EB%AC%B4%EB%A3%8C%EB%B0%B0%EC%86%A1-3colors-%EB%A8%B8%EB%9E%AD-%EC%88%8F%EC%95%BC%EC%83%81%ED%9B%84%EB%93%9C%EC%9E%90%EC%BC%93jk/3735/category/139/display/1'
+
+var message = function(message, callback, tag) {
+    // callback('eventName', 'XML URL', '[IMG URL]')
+    switch (message) {
+        case 'tapEvent':
+            switch (tag) {
+                case 1:
+                    callback('push', 'http://49.50.172.34/product/list/layout.xml', [img0, img1, img2, img3, img4, img5])
+                    break;
+                case 2:
+                    callback('pop')
+                    break;
+                case 3:
+                    callback('present', 'http://49.50.172.34/product/list/layout.xml')
+                    break;
+                case 4:
+                    callback('dismiss')
+                    break;
+                case 10:
+                    callback('moveURL', imgURL0)
+                    break;
+                case 11:
+                    callback('moveURL', imgURL1)
+                    break;
+                case 12:
+                    callback('moveURL', imgURL2)
                     break;
                 case 13:
                     callback('moveURL', imgURL3)
@@ -277,6 +337,8 @@ xml = '''
     </UIStackView>
 '''
 
+isMove = False
+
 class PostHandler(BaseHTTPRequestHandler):
     
     def do_POST(self):
@@ -299,7 +361,10 @@ class PostHandler(BaseHTTPRequestHandler):
         if path == ROUTE_PRODUCT_LIST_COORDINATOR:
             self.send_response(200)
             self.end_headers()
+            global isMove
+            js = jsMove if isMove == True else jsOpen
             self.wfile.write(bytes(js, 'utf-8'))
+            isMove = False if isMove == True else True
         elif path == ROUTE_PRODUCT_LIST_LAYOUT:
             self.send_response(200)
             self.end_headers()
