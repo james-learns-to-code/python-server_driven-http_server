@@ -342,6 +342,7 @@ isMove = False
 class PostHandler(BaseHTTPRequestHandler):
     
     def do_POST(self):
+        # Echo value
         content_length = int(self.headers['Content-Length'])
         body = self.rfile.read(content_length)
         self.send_response(200)
@@ -355,12 +356,12 @@ class PostHandler(BaseHTTPRequestHandler):
         path, _, _ = self.path.partition('?')
    
         print('path :' + path)
-        print('ROUTE_PRODUCT_LIST_COORDINATOR :' + ROUTE_PRODUCT_LIST_COORDINATOR)
 
         # Handle the possible request paths
         if path == ROUTE_PRODUCT_LIST_COORDINATOR:
             self.send_response(200)
             self.end_headers()
+            # Randomize response
             global isMove
             js = jsMove if isMove == True else jsOpen
             self.wfile.write(bytes(js, 'utf-8'))
