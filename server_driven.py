@@ -134,7 +134,7 @@ var message = function(message, callback, tag) {
 }
 '''
 
-xml = '''
+xmlBlack = '''
     <UIStackView
         alignment="center"
         distribution="fillEqually"
@@ -312,7 +312,8 @@ xml = '''
                 width="100"
                 height="100"
                 top="10"
-                left="20"/>
+                left="20"
+                transform.rotation="pi / 4"/>
             <UIButton
                 title="머랭 숏야상후드자켓jk"
                 titleColor="black"
@@ -337,7 +338,217 @@ xml = '''
     </UIStackView>
 '''
 
+xmlRed = '''
+    <UIStackView
+        alignment="center"
+        distribution="fillEqually"
+        axis="vertical"
+        width="100%"
+        height="{height}"
+        top="{navBarHeight}"
+        spacing="0">
+        <UIView
+            backgroundColor="white">
+            <UIImageView
+                image="{image0}"
+                width="100"
+                height="100"
+                top="10"
+                left="20" />
+            <UIButton
+                title="주카 체크남방"
+                titleColor="black"
+                top="20"
+                left="135"
+                tag="10"
+                touchUpInside="wasPressedtag:"/>
+            <UILabel
+                text="박시한 핏으로 편안하게 코디할수 있어요."
+                textColor="gray"
+                font="12"
+                left="135"
+                top="50" />
+            <UILabel
+                text="19,500원"
+                textColor="red"
+                left="135"
+                font="bold"
+                top="80" />
+        </UIView>
+        <UIView
+            backgroundColor="white">
+            <UIView
+                backgroundColor="gray"
+                width="95%"
+                center.x="50%"
+                height="1"/>
+            <UIImageView
+                image="{image1}"
+                width="100"
+                height="100"
+                top="10"
+                left="20"/>
+            <UIButton
+                title="하리 셔츠"
+                titleColor="black"
+                top="20"
+                left="135"
+                tag="11"
+                touchUpInside="wasPressedtag:"/>
+            <UILabel
+                text="둥근카라가 매력적인 워싱 셔츠에요."
+                textColor="gray"
+                font="12"
+                left="135"
+                top="50" />
+            <UILabel
+                text="28,500원"
+                textColor="red"
+                left="135"
+                font="bold"
+                top="80"/>
+        </UIView>
+        <UIView
+            backgroundColor="white">
+            <UIView
+                backgroundColor="gray"
+                width="95%"
+                center.x="50%"
+                height="1"/>
+            <UIImageView
+                image="{image2}"
+                width="100"
+                height="100"
+                top="10"
+                left="20"/>
+            <UIButton
+                title="린넨꽃나시"
+                titleColor="black"
+                top="20"
+                left="135"
+                tag="12"
+                touchUpInside="wasPressedtag:"/>
+            <UILabel
+                text="잔꽃무늬라 은은하게 포인트 코디할수 있어요!"
+                textColor="gray"
+                font="12"
+                left="135"
+                top="50"/>
+            <UILabel
+                text="13,000원"
+                textColor="red"
+                left="135"
+                font="bold"
+                top="80"/>
+        </UIView>
+        <UIView
+            backgroundColor="white">
+            <UIView
+                backgroundColor="gray"
+                width="95%"
+                center.x="50%"
+                height="1"/>
+            <UIImageView
+                image="{image3}"
+                width="100"
+                height="100"
+                top="10"
+                left="20"/>
+            <UIButton
+                title="믹스 랩 스트라이프가디건cd"
+                titleColor="black"
+                top="20"
+                left="135"
+                tag="13"
+                touchUpInside="wasPressedtag:"/>
+            <UILabel
+                text="전체적으로 들어간 스트라이프 패턴으로 캐주얼한 무드를 연출해주었어요"
+                font="12"
+                textColor="gray"
+                left="135"
+                numberOfLines="0"
+                right="20"
+                top="50"/>
+            <UILabel
+                text="35,000원"
+                textColor="red"
+                left="135"
+                font="bold"
+                top="80"/>
+        </UIView>
+        <UIView
+            backgroundColor="white">
+            <UIView
+                backgroundColor="gray"
+                width="95%"
+                center.x="50%"
+                height="1"/>
+            <UIImageView
+                image="{image4}"
+                width="100"
+                height="100"
+                top="10"
+                left="20"/>
+            <UIButton
+                title="존 프린팅박스맨투맨mtm"
+                titleColor="black"
+                top="20"
+                left="135"
+                tag="14"
+                touchUpInside="wasPressedtag:"/>
+            <UILabel
+                text="캐주얼한 무드의 박스핏맨투맨"
+                font="12"
+                textColor="gray"
+                left="135"
+                top="50"/>
+            <UILabel
+                text="28,000원"
+                textColor="red"
+                font="bold"
+                left="135"
+                top="80"/>
+        </UIView>
+        <UIView
+            backgroundColor="white">
+            <UIView
+                backgroundColor="gray"
+                width="95%"
+                center.x="50%"
+                height="1"/>
+            <UIImageView
+                image="{image5}"
+                width="100"
+                height="100"
+                top="10"
+                left="20"/>
+            <UIButton
+                title="머랭 숏야상후드자켓jk"
+                titleColor="black"
+                top="20"
+                left="135"
+                tag="15"
+                touchUpInside="wasPressedtag:"/>
+            <UILabel
+                text="숏한 기장감에 후드 디테일로 캐주얼하면서 발랄한 무드를 연출해주었어요"
+                font="12"
+                numberOfLines="0"
+                textColor="gray"
+                left="135"
+                right="20"
+                top="50"/>
+            <UILabel
+                text="65,000원"
+                textColor="red"
+                font="bold"
+                left="135"
+                top="80"/>
+        </UIView>
+    </UIStackView>
+'''
+
 isMove = False
+isRed = False
 
 class PostHandler(BaseHTTPRequestHandler):
     
@@ -369,7 +580,11 @@ class PostHandler(BaseHTTPRequestHandler):
         elif path == ROUTE_PRODUCT_LIST_LAYOUT:
             self.send_response(200)
             self.end_headers()
+            # Randomize response
+            global isRed
+            xml = xmlRed if isRed == True else xmlBlack
             self.wfile.write(bytes(xml, 'utf-8'))
+            isRed = False if isRed == True else True
         else:
             self.send_response(404)
             self.end_headers()
